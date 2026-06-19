@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 
 import type { DarkMode } from '../../chat/hooks/useDarkMode';
 import type {
-  AppAccent,
   AppContrast,
   AppDensity,
   AppFontSize,
@@ -47,11 +46,6 @@ const CONTRAST_OPTIONS: Array<{ value: AppContrast; label: string; hint: string 
 const FONT_SIZE_OPTIONS: Array<{ value: AppFontSize; label: string; hint: string }> = [
   { value: 'standard', label: 'Standard', hint: 'Domyślny rozmiar tekstu dla desktopu.' },
   { value: 'large', label: 'Większy tekst', hint: 'Lepsza czytelność na ekranach laptopów.' },
-];
-
-const ACCENT_OPTIONS: Array<{ value: AppAccent; label: string; hint: string }> = [
-  { value: 'yellow', label: 'PORR żółty', hint: 'Mocny brand i wyraźne CTA.' },
-  { value: 'blue', label: 'Techniczny niebieski', hint: 'Spokojniejsze akcje i mniej agresywny akcent.' },
 ];
 
 export function AppSettingsDialog({
@@ -267,36 +261,6 @@ export function AppSettingsDialog({
                 role="radio"
                 aria-checked={settings.fontSize === option.value}
                 onClick={() => onSettingsChange({ fontSize: option.value })}
-              >
-                <strong>{option.label}</strong>
-                <span>{option.hint}</span>
-              </button>
-            ))}
-          </div>
-
-          <div className="app-settings__section-heading app-settings__section-heading--nested">
-            <span className="app-settings__section-icon" aria-hidden="true">
-              <Icon name="sparkles" size={17} />
-            </span>
-            <div>
-              <h3>Kolor akcentu</h3>
-              <p>Wpływa na główne przyciski, aktywne stany, fokus i źródła.</p>
-            </div>
-          </div>
-
-          <div className="app-settings__options app-settings__options--two" role="radiogroup" aria-label="Kolor akcentu">
-            {ACCENT_OPTIONS.map((option) => (
-              <button
-                key={option.value}
-                type="button"
-                className={
-                  settings.accent === option.value
-                    ? `app-settings__option app-settings__option--active app-settings__option--accent-${option.value}`
-                    : `app-settings__option app-settings__option--accent-${option.value}`
-                }
-                role="radio"
-                aria-checked={settings.accent === option.value}
-                onClick={() => onSettingsChange({ accent: option.value })}
               >
                 <strong>{option.label}</strong>
                 <span>{option.hint}</span>

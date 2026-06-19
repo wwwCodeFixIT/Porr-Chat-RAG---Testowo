@@ -4,25 +4,22 @@ export type AppDensity = 'comfortable' | 'compact';
 export type AppVisuals = 'rich' | 'clean';
 export type AppContrast = 'standard' | 'high';
 export type AppFontSize = 'standard' | 'large';
-export type AppAccent = 'yellow' | 'blue';
 
 export type AppSettings = {
   density: AppDensity;
   visuals: AppVisuals;
   contrast: AppContrast;
   fontSize: AppFontSize;
-  accent: AppAccent;
   showKeyboardHints: boolean;
 };
 
-const STORAGE_KEY = 'korpus:app-settings:v3';
+const STORAGE_KEY = 'korpus:app-settings:v4';
 
 export const DEFAULT_APP_SETTINGS: AppSettings = {
   density: 'comfortable',
   visuals: 'rich',
   contrast: 'high',
   fontSize: 'standard',
-  accent: 'yellow',
   showKeyboardHints: true,
 };
 
@@ -40,10 +37,6 @@ function isAppContrast(value: unknown): value is AppContrast {
 
 function isAppFontSize(value: unknown): value is AppFontSize {
   return value === 'standard' || value === 'large';
-}
-
-function isAppAccent(value: unknown): value is AppAccent {
-  return value === 'yellow' || value === 'blue';
 }
 
 function normalizeSettings(value: unknown): AppSettings {
@@ -64,9 +57,6 @@ function normalizeSettings(value: unknown): AppSettings {
     fontSize: isAppFontSize(candidate.fontSize)
       ? candidate.fontSize
       : DEFAULT_APP_SETTINGS.fontSize,
-    accent: isAppAccent(candidate.accent)
-      ? candidate.accent
-      : DEFAULT_APP_SETTINGS.accent,
     showKeyboardHints:
       typeof candidate.showKeyboardHints === 'boolean'
         ? candidate.showKeyboardHints
@@ -81,7 +71,6 @@ function applyAppSettings(settings: AppSettings) {
   document.documentElement.dataset.visuals = settings.visuals;
   document.documentElement.dataset.contrast = settings.contrast;
   document.documentElement.dataset.fontSize = settings.fontSize;
-  document.documentElement.dataset.accent = settings.accent;
   document.documentElement.dataset.keyboardHints = settings.showKeyboardHints
     ? 'visible'
     : 'hidden';

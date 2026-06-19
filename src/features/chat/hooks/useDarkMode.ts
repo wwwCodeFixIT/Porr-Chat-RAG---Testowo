@@ -25,7 +25,7 @@ function applyTheme(mode: DarkMode) {
 }
 
 export function useDarkMode() {
-  const [mode, setMode] = useState<DarkMode>('dark'); // default dark (PORR brand)
+  const [mode, setMode] = useState<DarkMode>('light'); // PORR komunikuje się przez biel — jasny jest domyślny
   const [isReady, setIsReady] = useState(false);
 
   // load preference on mount
@@ -40,10 +40,10 @@ export function useDarkMode() {
           setMode(stored.value);
           applyTheme(stored.value);
         } else {
-          applyTheme('dark');
+          applyTheme('light');
         }
       } catch {
-        applyTheme('dark');
+        applyTheme('light');
       } finally {
         if (mounted) setIsReady(true);
       }
