@@ -485,18 +485,19 @@ export async function sendChatMessageStream(
   const answer = buildLocalMockAnswer(sources);
   const chunks = answer.match(/.{1,28}(\s|$)/g) ?? [answer];
 
-  let generatedContent = '';
-
+  // Rzucamy AbortError przy przerwaniu — tak samo jak robi to natywny fetch()
+  // w prawdziwym chatApi.ts. Dzięki temu jeden catch(AbortError) w
+  // useChatMessages.runStream obsługuje Stop identycznie w obu trybach
+  // (mock i realny backend) i zapisuje to, co zdążyło się wygenerować.
   for (const chunk of chunks) {
-    if (signal?.aborted) return;
+    if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
 
     await wait(34);
 
-    generatedContent += chunk;
     handlers.onDelta(chunk);
   }
 
-  if (signal?.aborted) return;
+  if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
 
   await wait(120);
 
@@ -508,6 +509,4 @@ export async function sendChatMessageStream(
     messageId: assistantMessageId,
     createdAt: assistantCreatedAt,
   });
-
-  void generatedContent;
 }

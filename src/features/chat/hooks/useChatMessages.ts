@@ -149,6 +149,9 @@ export function useChatMessages(
       sendingRef.current = true;
       streamingChatIdRef.current = targetChatId;
 
+      let finalContent = '';
+      let finalSources: ChatSource[] = [];
+
       try {
         setIsSending(true);
         setError(null);
@@ -162,9 +165,6 @@ export function useChatMessages(
         if (persistUser) {
           await history.addMessage(userMessage);
         }
-
-        let finalContent = '';
-        let finalSources: ChatSource[] = [];
 
         await chatApi.sendChatMessageStream(
           targetChatId,
@@ -221,10 +221,23 @@ export function useChatMessages(
         );
       } catch (err) {
         if (err instanceof DOMException && err.name === 'AbortError') {
-          updateMessage(assistantMessage.id, (current) => ({
-            ...current,
+          const stopped: ChatMessage = {
+            ...assistantMessage,
+            content: finalContent || assistantMessage.content,
+            sources: finalSources.length ? finalSources : assistantMessage.sources,
             isStreaming: false,
-          }));
+          };
+
+          updateMessage(assistantMessage.id, () => stopped);
+
+          // Zapisz to, co zdążyło wygenerować się przed Stopem — bez tego
+          // treść zniknie po odświeżeniu, bo reload() czyta tylko IndexedDB.
+          try {
+            await history.addMessage(stopped);
+          } catch {
+            // UI ma już treść; zapis lokalny jest best-effort.
+          }
+
           return;
         }
 
@@ -274,6 +287,10 @@ export function useChatMessages(
   );
 
   const stopGeneration = useCallback(() => {
+    // Samo abort() wystarczy — await na chatApi.sendChatMessageStream w
+    // runStream zakończy się wyjątkiem AbortError, a tamten catch zapisuje
+    // częściową odpowiedź do IndexedDB (patrz runStream). Tu tylko czyścimy
+    // referencje i UI na wszelki wypadek, gdyby coś zostało w trakcie.
     abortRef.current?.abort();
     abortRef.current = null;
     sendingRef.current = false;
