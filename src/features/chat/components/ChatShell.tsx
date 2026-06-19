@@ -54,6 +54,7 @@ export function ChatShell() {
 
   const [activeView, setActiveView] = useState<AppView>('chat');
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   /* ---------------- chats + messages (IndexedDB) ---------------- */
   const sessions = useChatSessions({
@@ -609,6 +610,10 @@ export function ChatShell() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [documents]);
 
+  useEffect(() => {
+    setIsMobileSidebarOpen(false);
+  }, [activeView]);
+
   /* ---------------- keyboard shortcuts ---------------- */
   useKeyboardShortcuts([
     {
@@ -638,6 +643,7 @@ export function ChatShell() {
       label: 'Zamknij panele',
       handler: () => {
         setIsDocumentsPanelOpen(false);
+        setIsMobileSidebarOpen(false);
       },
     },
     {
@@ -674,24 +680,58 @@ export function ChatShell() {
         onOpenSettings={() => setIsSettingsOpen(true)}
         onExportAll={handleExportAll}
         onClearHistory={handleClearAllHistory}
+        onOpenMobileSidebar={() => setIsMobileSidebarOpen(true)}
       />
 
       {activeView === 'chat' ? (
-        <div className="chat-shell__body">
-          <ChatSidebar
-            chats={sessions.chats}
-            activeChatId={sessions.activeChatId}
-            isLoading={sessions.isLoading}
-            isCreatingChat={sessions.isCreating}
-            isInteractionLocked={messagesState.isSending}
-            chatActionId={sessions.actionId}
-            onCreateChat={handleCreateChat}
-            onSelectChat={sessions.selectChat}
-            onRenameChat={sessions.renameChat}
-            onDeleteChat={handleDeleteChat}
-            onTogglePinChat={sessions.togglePinChat}
-            onExportChat={handleExportChat}
+        <div
+          className={
+            isMobileSidebarOpen
+              ? 'chat-shell__body chat-shell__body--sidebar-open'
+              : 'chat-shell__body'
+          }
+        >
+          <button
+            type="button"
+            className="chat-shell__sidebar-scrim"
+            aria-label="Zamknij historię rozmów"
+            onClick={() => setIsMobileSidebarOpen(false)}
           />
+
+          <div className="chat-shell__sidebar-frame">
+            <div className="chat-shell__sidebar-head">
+              <div>
+                <span>Historia</span>
+                <strong>Rozmowy agenta</strong>
+              </div>
+
+              <button
+                type="button"
+                aria-label="Zamknij historię rozmów"
+                onClick={() => setIsMobileSidebarOpen(false)}
+              >
+                ×
+              </button>
+            </div>
+
+            <ChatSidebar
+              chats={sessions.chats}
+              activeChatId={sessions.activeChatId}
+              isLoading={sessions.isLoading}
+              isCreatingChat={sessions.isCreating}
+              isInteractionLocked={messagesState.isSending}
+              chatActionId={sessions.actionId}
+              onCreateChat={handleCreateChat}
+              onSelectChat={(chatId) => {
+                sessions.selectChat(chatId);
+                setIsMobileSidebarOpen(false);
+              }}
+              onRenameChat={sessions.renameChat}
+              onDeleteChat={handleDeleteChat}
+              onTogglePinChat={sessions.togglePinChat}
+              onExportChat={handleExportChat}
+            />
+          </div>
 
           <ChatMain
             activeChat={activeChat}

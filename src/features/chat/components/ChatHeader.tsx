@@ -15,6 +15,7 @@ type ChatHeaderProps = {
   onOpenSettings: () => void;
   onExportAll?: () => void;
   onClearHistory?: () => void;
+  onOpenMobileSidebar?: () => void;
 };
 
 const USE_MOCK_API = import.meta.env.VITE_USE_MOCK_API === 'true';
@@ -41,6 +42,7 @@ export function ChatHeader({
   onOpenSettings,
   onExportAll,
   onClearHistory,
+  onOpenMobileSidebar,
 }: ChatHeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -104,6 +106,18 @@ export function ChatHeader({
       </nav>
 
       <div className="chat-header__meta">
+        {activeView === 'chat' && onOpenMobileSidebar ? (
+          <button
+            type="button"
+            className="chat-header__mobile-history"
+            aria-label="Otwórz historię rozmów"
+            onClick={onOpenMobileSidebar}
+          >
+            <Icon name="chat" size={16} />
+            <span>Rozmowy</span>
+          </button>
+        ) : null}
+
         <button
           type="button"
           className="chat-header__icon-btn"

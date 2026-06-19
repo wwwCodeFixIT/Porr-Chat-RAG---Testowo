@@ -702,7 +702,7 @@ export function DocumentsManager({
                           isSelected ? 'documents-manager__row--selected' : ''
                         }
                       >
-                        <td className="documents-manager__select-column">
+                        <td className="documents-manager__select-column" data-label="Wybór">
                           <label className="documents-manager__checkbox">
                             <input
                               type="checkbox"
@@ -720,7 +720,7 @@ export function DocumentsManager({
                           </label>
                         </td>
 
-                        <td>
+                        <td data-label="Nazwa">
                           <div className="documents-manager__file">
   <DocumentFileMark fileName={documentItem.name} />
 
@@ -733,11 +733,11 @@ export function DocumentsManager({
 </div>
                         </td>
 
-                        <td>
+                        <td data-label="Status">
                           <DocumentStatusBadge status={documentItem.status} />
                         </td>
 
-                        <td>
+                        <td data-label="Folder">
                           <select
                             className="documents-manager__folder-select"
                             value={documentItem.folderId ?? ''}
@@ -759,10 +759,10 @@ export function DocumentsManager({
                           </select>
                         </td>
 
-                        <td>{formatFileSize(documentItem.size)}</td>
-                        <td>{formatDocumentDate(documentItem.createdAt)}</td>
+                        <td data-label="Rozmiar">{formatFileSize(documentItem.size)}</td>
+                        <td data-label="Dodano">{formatDocumentDate(documentItem.createdAt)}</td>
 
-                        <td>
+                        <td data-label="Akcje">
                           <div className="documents-manager__actions">
                             <button
                               type="button"
