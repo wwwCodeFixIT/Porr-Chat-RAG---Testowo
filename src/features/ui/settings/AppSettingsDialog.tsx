@@ -50,8 +50,8 @@ const FONT_SIZE_OPTIONS: Array<{ value: AppFontSize; label: string; hint: string
 ];
 
 const FONT_FAMILY_OPTIONS: Array<{ value: AppFontFamily; label: string; hint: string }> = [
-  { value: 'readable', label: 'Czytelny UI', hint: 'Inter/system, większa wysokość linii i spokojniejsze nagłówki.' },
-  { value: 'system', label: 'Systemowy', hint: 'Natywna czcionka Windows/macOS, mniej ingerencji wizualnej.' },
+  { value: 'readable', label: 'Czytelny UI', hint: 'Segoe UI / systemowa, większa wysokość linii i spokojniejsze nagłówki.' },
+  { value: 'system', label: 'Systemowy', hint: 'Natywna czcionka Windows/macOS, bez ciasnych liter i agresywnych wag.' },
 ];
 
 export function AppSettingsDialog({

@@ -35,7 +35,7 @@
 
 .chat-input__field:focus {
   border-color: var(--porr-blue);
-  outline: 3px solid rgba(255, 237, 0, 0.65);
+  outline: 3px solid rgba(228, 194, 79, 0.65);
   outline-offset: 2px;
 }
 

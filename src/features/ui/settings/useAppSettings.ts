@@ -15,14 +15,14 @@ export type AppSettings = {
   showKeyboardHints: boolean;
 };
 
-const STORAGE_KEY = 'korpus:app-settings:v5';
+const STORAGE_KEY = 'korpus:app-settings:v6';
 
 export const DEFAULT_APP_SETTINGS: AppSettings = {
   density: 'comfortable',
   visuals: 'rich',
   contrast: 'high',
   fontSize: 'standard',
-  fontFamily: 'readable',
+  fontFamily: 'system',
   showKeyboardHints: true,
 };
 
