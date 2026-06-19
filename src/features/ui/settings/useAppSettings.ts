@@ -4,22 +4,25 @@ export type AppDensity = 'comfortable' | 'compact';
 export type AppVisuals = 'rich' | 'clean';
 export type AppContrast = 'standard' | 'high';
 export type AppFontSize = 'standard' | 'large';
+export type AppFontFamily = 'system' | 'readable';
 
 export type AppSettings = {
   density: AppDensity;
   visuals: AppVisuals;
   contrast: AppContrast;
   fontSize: AppFontSize;
+  fontFamily: AppFontFamily;
   showKeyboardHints: boolean;
 };
 
-const STORAGE_KEY = 'korpus:app-settings:v4';
+const STORAGE_KEY = 'korpus:app-settings:v5';
 
 export const DEFAULT_APP_SETTINGS: AppSettings = {
   density: 'comfortable',
   visuals: 'rich',
   contrast: 'high',
   fontSize: 'standard',
+  fontFamily: 'readable',
   showKeyboardHints: true,
 };
 
@@ -37,6 +40,10 @@ function isAppContrast(value: unknown): value is AppContrast {
 
 function isAppFontSize(value: unknown): value is AppFontSize {
   return value === 'standard' || value === 'large';
+}
+
+function isAppFontFamily(value: unknown): value is AppFontFamily {
+  return value === 'system' || value === 'readable';
 }
 
 function normalizeSettings(value: unknown): AppSettings {
@@ -57,6 +64,9 @@ function normalizeSettings(value: unknown): AppSettings {
     fontSize: isAppFontSize(candidate.fontSize)
       ? candidate.fontSize
       : DEFAULT_APP_SETTINGS.fontSize,
+    fontFamily: isAppFontFamily(candidate.fontFamily)
+      ? candidate.fontFamily
+      : DEFAULT_APP_SETTINGS.fontFamily,
     showKeyboardHints:
       typeof candidate.showKeyboardHints === 'boolean'
         ? candidate.showKeyboardHints
@@ -71,6 +81,7 @@ function applyAppSettings(settings: AppSettings) {
   document.documentElement.dataset.visuals = settings.visuals;
   document.documentElement.dataset.contrast = settings.contrast;
   document.documentElement.dataset.fontSize = settings.fontSize;
+  document.documentElement.dataset.fontFamily = settings.fontFamily;
   document.documentElement.dataset.keyboardHints = settings.showKeyboardHints
     ? 'visible'
     : 'hidden';
