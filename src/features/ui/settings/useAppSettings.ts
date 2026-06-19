@@ -2,10 +2,12 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 export type AppDensity = 'comfortable' | 'compact';
 export type AppVisuals = 'rich' | 'clean';
+export type AppContrast = 'standard' | 'high';
 
 export type AppSettings = {
   density: AppDensity;
   visuals: AppVisuals;
+  contrast: AppContrast;
   showKeyboardHints: boolean;
 };
 
@@ -14,6 +16,7 @@ const STORAGE_KEY = 'korpus:app-settings:v2';
 export const DEFAULT_APP_SETTINGS: AppSettings = {
   density: 'comfortable',
   visuals: 'rich',
+  contrast: 'standard',
   showKeyboardHints: true,
 };
 
@@ -23,6 +26,10 @@ function isAppDensity(value: unknown): value is AppDensity {
 
 function isAppVisuals(value: unknown): value is AppVisuals {
   return value === 'rich' || value === 'clean';
+}
+
+function isAppContrast(value: unknown): value is AppContrast {
+  return value === 'standard' || value === 'high';
 }
 
 function normalizeSettings(value: unknown): AppSettings {
@@ -37,6 +44,9 @@ function normalizeSettings(value: unknown): AppSettings {
     visuals: isAppVisuals(candidate.visuals)
       ? candidate.visuals
       : DEFAULT_APP_SETTINGS.visuals,
+    contrast: isAppContrast(candidate.contrast)
+      ? candidate.contrast
+      : DEFAULT_APP_SETTINGS.contrast,
     showKeyboardHints:
       typeof candidate.showKeyboardHints === 'boolean'
         ? candidate.showKeyboardHints
@@ -49,6 +59,7 @@ function applyAppSettings(settings: AppSettings) {
 
   document.documentElement.dataset.density = settings.density;
   document.documentElement.dataset.visuals = settings.visuals;
+  document.documentElement.dataset.contrast = settings.contrast;
   document.documentElement.dataset.keyboardHints = settings.showKeyboardHints
     ? 'visible'
     : 'hidden';
