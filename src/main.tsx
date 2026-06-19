@@ -7,6 +7,7 @@ import './styles/theme.css';
 import './styles/global.css';
 import './styles/dark-overrides.css';
 import './styles/modern-contrast-polish.css';
+import './styles/accessibility-settings-polish.css';
 
 // Domyślny motyw ustawiany natychmiast (przed renderem React), żeby uniknąć
 // mignięcia nieostylowanej treści. useDarkMode() i tak nadpisze go preferencją
