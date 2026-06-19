@@ -1,0 +1,120 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--page-bg);
+  color: var(--text-main);
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+textarea,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+:focus-visible {
+  outline: 3px solid var(--porr-yellow);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+}
+
+a:focus-visible {
+  outline: 3px solid var(--porr-yellow);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--porr-yellow);
+  color: var(--porr-blue);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+/* App personalization applied by Settings dialog */
+:root[data-density="compact"] {
+  --header-height: 58px;
+  --sidebar-width: 292px;
+  --radius-lg: 15px;
+  --radius-xl: 20px;
+}
+
+:root[data-density="compact"] .chat-message-list {
+  padding-block: 22px;
+}
+
+:root[data-density="compact"] .chat-message-list__inner {
+  gap: 16px;
+}
+
+:root[data-density="compact"] .chat-input {
+  padding-block: 14px 16px;
+}
+
+:root[data-density="compact"] .chat-sidebar {
+  padding-block: 14px;
+}
+
+:root[data-visuals="clean"] body {
+  background: var(--page-bg) !important;
+}
+
+:root[data-visuals="clean"] .empty-state__orb,
+:root[data-visuals="clean"] .empty-state__pulse {
+  display: none !important;
+}
+
+:root[data-visuals="clean"] .chat-main,
+:root[data-visuals="clean"] .chat-header,
+:root[data-visuals="clean"] .empty-state__inner,
+:root[data-visuals="clean"] .app-settings {
+  backdrop-filter: none !important;
+}

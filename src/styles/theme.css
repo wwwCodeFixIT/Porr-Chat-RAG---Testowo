@@ -1,0 +1,92 @@
+:root {
+  /* PORR brand */
+  --porr-blue: #143e6f;
+  --porr-blue-dark: #0b2b50;
+  --porr-blue-hover: #103760;
+
+  --porr-yellow: #ffed00;
+  --porr-yellow-hover: #f2df00;
+
+  --porr-white: #ffffff;
+
+  /* Backgrounds */
+  --page-bg: #f4f7fb;
+  --surface: #ffffff;
+  --surface-muted: #f8fafc;
+
+  /* Borders */
+  --border: #d8e0ea;
+  --border-strong: #b7c4d4;
+
+  /* Text */
+  --text-main: #102033;
+  --text-muted: #5d6b7a;
+  --text-soft: #7a8795;
+  --text-inverted: #ffffff;
+
+  /* States */
+  --success: #16794c;
+  --warning: #b77900;
+  --error: #b42318;
+
+  /* Layout */
+  --header-height: 64px;
+  --sidebar-width: 320px;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(16, 32, 51, 0.08);
+  --shadow-md: 0 10px 30px rgba(16, 32, 51, 0.12);
+}
+
+/* Tryb jasny — aktywowany przez useDarkMode() ustawiający data-theme="light" */
+:root[data-theme="light"] {
+  /* PORR brand */
+  --porr-blue: #143e6f;
+  --porr-blue-dark: #0b2b50;
+  --porr-blue-hover: #103760;
+
+  --porr-yellow: #ffed00;
+  --porr-yellow-hover: #f2df00;
+
+  --porr-white: #ffffff;
+
+  /* Backgrounds */
+  --page-bg: #f4f7fb;
+  --surface: #ffffff;
+  --surface-muted: #f8fafc;
+
+  /* Borders */
+  --border: #d8e0ea;
+  --border-strong: #b7c4d4;
+
+  /* Text */
+  --text-main: #102033;
+  --text-muted: #5d6b7a;
+  --text-soft: #7a8795;
+  --text-inverted: #ffffff;
+
+  /* States */
+  --success: #16794c;
+  --warning: #b77900;
+  --error: #b42318;
+
+  /* Layout */
+  --header-height: 64px;
+  --sidebar-width: 320px;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(16, 32, 51, 0.08);
+  --shadow-md: 0 10px 30px rgba(16, 32, 51, 0.12);
+}

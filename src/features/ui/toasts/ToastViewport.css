@@ -1,0 +1,96 @@
+.toast-viewport {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 100;
+  width: min(420px, calc(100vw - 32px));
+  display: grid;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  display: grid;
+  grid-template-columns: 5px minmax(0, 1fr) auto;
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+}
+
+.toast__marker {
+  border-radius: 999px;
+  background: var(--porr-blue);
+}
+
+.toast--success .toast__marker {
+  background: var(--success);
+}
+
+.toast--error .toast__marker {
+  background: var(--error);
+}
+
+.toast--warning .toast__marker {
+  background: var(--warning);
+}
+
+.toast--info .toast__marker {
+  background: var(--porr-blue);
+}
+
+.toast__content {
+  min-width: 0;
+}
+
+.toast__eyebrow {
+  margin: 0 0 2px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.toast__title {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 900;
+}
+
+.toast__description {
+  margin: 5px 0 0;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.toast__close {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--porr-blue);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.toast__close:hover {
+  border-color: var(--porr-blue);
+}
+
+@media (max-width: 640px) {
+  .toast-viewport {
+    right: 12px;
+    bottom: 12px;
+    width: calc(100vw - 24px);
+  }
+}

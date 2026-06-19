@@ -1,0 +1,34 @@
+.chat-shell {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--page-bg);
+}
+
+/* nagłówek ma stałą wysokość; reszta wypełnia ekran i sama zarządza scrollem */
+.chat-shell > .chat-header {
+  flex: 0 0 auto;
+}
+
+.chat-shell__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+  overflow: hidden;
+}
+
+/* widok dokumentów też powinien wypełniać i scrollować się wewnętrznie */
+.chat-shell > .documents-manager {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+@media (max-width: 900px) {
+  .chat-shell__body {
+    grid-template-columns: 1fr;
+  }
+}
