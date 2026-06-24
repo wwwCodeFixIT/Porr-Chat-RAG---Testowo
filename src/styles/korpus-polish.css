@@ -1,0 +1,687 @@
+/* =============================================================================
+   Korpus — korpus-polish.css
+   -----------------------------------------------------------------------------
+   POLISH istniejącego designu w stronę tech-minimal.
+   NIE redesign — sidebar PORR-granatowy zostaje, żółty akcent zostaje,
+   układ zostaje. Zmieniają się tylko detale, które dodają "techu":
+
+   1. Dark mode: jednolite deep-navy zamiast fioletowo-granatowego miksu,
+      bez radial glow w tle i w karcie empty state.
+   2. Monospace + tabular-nums dla wszystkich metadanych: liczników,
+      skrótów klawiszowych, timestampów, score'ów, ścieżek plików.
+   3. Skala radiusów ścięta z 24/34 na 12/14 — nadal miękko, ale ostrzej.
+   4. Wagi fontów: 950 → 700, 900 → 600 (czytelność bez krzyku).
+   5. Hairline borders zamiast 2px multi-color.
+   6. Subtle dot grid w tle (opcjonalny, można wyłączyć przez data-visuals=clean).
+   7. Empty state title "Korpus" w light: żółty highlight zamiast brązu.
+
+   Marka PORR nietknięta:
+   - granatowy sidebar #143e6f
+   - żółty akcent #FFED00
+   - układ ten sam, klasy te same
+
+   Wdrożenie — src/main.tsx, PO theme.css:
+     import './styles/theme.css';
+     import './styles/korpus-polish.css';
+   ============================================================================= */
+
+@layer korpus-polish {
+
+  /* =========================================================================
+     1. TOKENS — drobne korekty
+     ========================================================================= */
+
+  :root {
+    --kp-font-mono: 'JetBrains Mono', 'SF Mono', ui-monospace,
+                    'Cascadia Mono', Menlo, Consolas, monospace;
+
+    /* Ścięte radiusy — wciąż miękkie, ale tech */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+  }
+
+  :root[data-theme='dark'] {
+    /* Jednolite deep navy zamiast fioletowo-granatowego miksu */
+    --page-bg: #0a1422;
+    --surface: #0f1c30;
+    --surface-muted: #142441;
+    --surface-elevated: #0c1628;
+    --surface-card: #0f1c30;
+    --surface-card-muted: #142441;
+    --surface-glass: #0f1c30;
+
+    --border: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.16);
+
+    --text-main: #f1f5fb;
+    --text-muted: #9aa9c2;
+    --text-soft: #6b7a93;
+  }
+
+  /* =========================================================================
+     2. BODY — jednolite tło, subtle dot grid
+     ========================================================================= */
+
+  body {
+    background: var(--page-bg) !important;
+    background-image: radial-gradient(
+      circle,
+      rgba(15, 30, 50, 0.06) 0.5px,
+      transparent 0.5px
+    );
+    background-size: 22px 22px;
+  }
+
+  :root[data-theme='dark'] body {
+    background: #0a1422 !important;
+    background-image: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.025) 0.5px,
+      transparent 0.5px
+    );
+    background-size: 22px 22px;
+  }
+
+  :root[data-visuals='clean'] body {
+    background-image: none !important;
+  }
+
+  /* =========================================================================
+     3. HEADER — clean, no glow
+     ========================================================================= */
+
+  .chat-header {
+    box-shadow: none !important;
+  }
+
+  :root[data-theme='dark'] .chat-header {
+    background: #0c1828 !important;
+    border-bottom: 1px solid var(--border) !important;
+    box-shadow: none !important;
+  }
+
+  .chat-header__logo,
+  .empty-state__logo {
+    background: var(--porr-yellow) !important;
+    box-shadow: 0 0 0 1px rgba(15, 30, 50, 0.08) !important;
+  }
+
+  .chat-header__eyebrow,
+  .chat-header__status {
+    font-family: var(--kp-font-mono) !important;
+    font-size: 10.5px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase;
+  }
+
+  .chat-header__title {
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .chat-header__badge {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    box-shadow: none !important;
+  }
+
+  .chat-header__nav {
+    box-shadow: none !important;
+  }
+
+  :root[data-theme='dark'] .chat-header__nav {
+    background: #122036 !important;
+    border-color: rgba(255, 255, 255, 0.06) !important;
+    box-shadow: none !important;
+  }
+
+  .chat-header__nav-item {
+    font-weight: 600 !important;
+    letter-spacing: 0 !important;
+  }
+
+  .chat-header__nav-item--active,
+  .chat-header__nav-item--active:hover {
+    background: var(--porr-yellow) !important;
+    color: var(--porr-blue) !important;
+    box-shadow: none !important;
+  }
+
+  /* =========================================================================
+     4. SIDEBAR — bez zmian wizualnych, tylko mono metadane
+     ========================================================================= */
+
+  .chat-sidebar__group-label {
+    font-family: var(--kp-font-mono) !important;
+    font-size: 10px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.10em !important;
+  }
+
+  .chat-sidebar__group-label span {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 500 !important;
+  }
+
+  .chat-sidebar__item-date {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 500 !important;
+  }
+
+  .chat-sidebar__item-title {
+    font-weight: 600 !important;
+    letter-spacing: -0.005em !important;
+  }
+
+  /* =========================================================================
+     5. CHAT MAIN TOOLBAR — bez glow
+     ========================================================================= */
+
+  .chat-main {
+    background: var(--page-bg) !important;
+  }
+
+  :root[data-theme='dark'] .chat-main {
+    background: #0a1422 !important;
+  }
+
+  .chat-main__toolbar {
+    background: color-mix(in srgb, var(--surface) 88%, transparent) !important;
+    box-shadow: none !important;
+  }
+
+  :root[data-theme='dark'] .chat-main__toolbar {
+    background: rgba(12, 24, 40, 0.88) !important;
+    border-bottom-color: var(--border) !important;
+  }
+
+  .chat-main__agent-pill {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.06em !important;
+    box-shadow: none !important;
+  }
+
+  .chat-main__label {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  .chat-main__title {
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .chat-main__context {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 500 !important;
+  }
+
+  .chat-main__doc-health,
+  .chat-main__documents {
+    font-weight: 600 !important;
+    box-shadow: none !important;
+  }
+
+  .chat-main__doc-health strong,
+  .chat-main__documents strong {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 600 !important;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* =========================================================================
+     6. EMPTY STATE — clean, bez glow w dark mode
+     ========================================================================= */
+
+  .empty-state__inner {
+    border-radius: var(--radius-xl) !important;
+    border-top: 1px solid var(--border) !important;
+    background: var(--surface) !important;
+    box-shadow: 0 4px 16px rgba(15, 30, 50, 0.06),
+                0 1px 3px rgba(15, 30, 50, 0.04) !important;
+  }
+
+  :root[data-theme='dark'] .empty-state__inner {
+    background: #0f1c30 !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-top: 1px solid rgba(255, 237, 0, 0.32) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4),
+                0 2px 6px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  .empty-state__logo {
+    box-shadow: 0 0 0 1px rgba(15, 30, 50, 0.1),
+                0 6px 16px rgba(255, 237, 0, 0.15) !important;
+  }
+
+  :root[data-theme='dark'] .empty-state__logo {
+    box-shadow: 0 0 0 1px rgba(255, 237, 0, 0.25),
+                0 6px 20px rgba(255, 237, 0, 0.15) !important;
+  }
+
+  .empty-state__pulse {
+    background: rgba(255, 237, 0, 0.08) !important;
+    border: 1px solid rgba(255, 237, 0, 0.18) !important;
+  }
+
+  .empty-state__eyebrow {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.10em !important;
+  }
+
+  .empty-state__title {
+    font-weight: 700 !important;
+    letter-spacing: -0.03em !important;
+  }
+
+  /* "Korpus" — w light żółty highlight pod tekstem zamiast brązowego koloru */
+  :root[data-theme='light'] .empty-state__title span,
+  :root:not([data-theme='dark']) .empty-state__title span {
+    color: var(--text-main) !important;
+    background-image: linear-gradient(
+      transparent 65%,
+      rgba(255, 237, 0, 0.6) 65%,
+      rgba(255, 237, 0, 0.6) 95%,
+      transparent 95%
+    );
+    background-repeat: no-repeat;
+    padding: 0 2px;
+  }
+
+  :root[data-theme='dark'] .empty-state__title span {
+    color: var(--porr-yellow) !important;
+    text-shadow: 0 0 24px rgba(255, 237, 0, 0.2);
+  }
+
+  /* Status cards — mono + tabular nums + cleaner */
+  .empty-state__status-card {
+    border-radius: var(--radius-md) !important;
+    background: var(--surface-muted) !important;
+    border: 1px solid var(--border) !important;
+  }
+
+  :root[data-theme='dark'] .empty-state__status-card {
+    background: #122036 !important;
+    border-color: rgba(255, 255, 255, 0.06) !important;
+  }
+
+  .empty-state__status-card span {
+    font-family: var(--kp-font-mono) !important;
+    font-size: 10.5px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.10em !important;
+  }
+
+  .empty-state__status-card strong {
+    font-family: var(--kp-font-mono) !important;
+    font-size: 26px !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.02em !important;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Notice "Najpierw wgraj dokumenty" — clean */
+  .empty-state__notice {
+    border-radius: var(--radius-md) !important;
+    background: rgba(255, 237, 0, 0.08) !important;
+    border: 1px solid rgba(255, 237, 0, 0.28) !important;
+  }
+
+  :root[data-theme='dark'] .empty-state__notice {
+    background: rgba(255, 237, 0, 0.06) !important;
+    border-color: rgba(255, 237, 0, 0.22) !important;
+  }
+
+  .empty-state__notice button {
+    border-radius: var(--radius-md) !important;
+    font-weight: 700 !important;
+    box-shadow: none !important;
+  }
+
+  /* Suggestion cards — clean w dark mode */
+  .empty-state__card {
+    border-radius: var(--radius-md) !important;
+    background: var(--surface-muted) !important;
+    border: 1px solid var(--border) !important;
+    transition: border-color 140ms ease, transform 140ms ease !important;
+  }
+
+  :root[data-theme='dark'] .empty-state__card {
+    background: #122036 !important;
+    border-color: rgba(255, 255, 255, 0.06) !important;
+  }
+
+  .empty-state__card:hover:not(:disabled) {
+    border-color: var(--porr-yellow) !important;
+    background: var(--surface-muted) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  :root[data-theme='dark'] .empty-state__card:hover:not(:disabled) {
+    background: #16284c !important;
+    border-color: rgba(255, 237, 0, 0.5) !important;
+  }
+
+  .empty-state__card-icon {
+    background: transparent !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text-muted) !important;
+  }
+
+  .empty-state__card:hover:not(:disabled) .empty-state__card-icon {
+    background: var(--porr-yellow) !important;
+    border-color: var(--porr-yellow) !important;
+    color: var(--porr-blue) !important;
+  }
+
+  .empty-state__card-title {
+    font-weight: 700 !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  .empty-state__card-hint {
+    font-weight: 500 !important;
+  }
+
+  /* Skrót klawiszowy w stopce */
+  .empty-state__shortcut {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 500 !important;
+    font-size: 11.5px !important;
+  }
+
+  /* =========================================================================
+     7. KEYBOARD SHORTCUTS — mono, refined
+     ========================================================================= */
+
+  .empty-state__shortcut kbd,
+  .chat-input__hint kbd,
+  .chat-header__shortcuts kbd {
+    min-width: 20px !important;
+    min-height: 20px !important;
+    padding: 1px 6px !important;
+    border-radius: 5px !important;
+    border-bottom-width: 1px !important;
+    font-family: var(--kp-font-mono) !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+  }
+
+  :root[data-theme='dark'] .empty-state__shortcut kbd,
+  :root[data-theme='dark'] .chat-input__hint kbd,
+  :root[data-theme='dark'] .chat-header__shortcuts kbd {
+    background: #122036 !important;
+    border-color: rgba(255, 255, 255, 0.10) !important;
+    color: var(--text-main) !important;
+  }
+
+  /* =========================================================================
+     8. INPUT — tighter, focused
+     ========================================================================= */
+
+  .chat-input {
+    background: color-mix(in srgb, var(--surface) 85%, transparent) !important;
+    box-shadow: none !important;
+  }
+
+  :root[data-theme='dark'] .chat-input {
+    background: rgba(12, 24, 40, 0.88) !important;
+    border-top-color: var(--border) !important;
+  }
+
+  .chat-input__field {
+    border-radius: var(--radius-lg) !important;
+    box-shadow: 0 1px 2px rgba(15, 30, 50, 0.04) !important;
+  }
+
+  :root[data-theme='dark'] .chat-input__field {
+    background: #122036 !important;
+    border-color: rgba(255, 255, 255, 0.10) !important;
+    box-shadow: none !important;
+  }
+
+  .chat-input__field:focus {
+    border-color: var(--porr-yellow) !important;
+    box-shadow: 0 0 0 3px rgba(255, 237, 0, 0.22) !important;
+  }
+
+  .chat-input__send {
+    border-radius: var(--radius-md) !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.005em !important;
+    box-shadow: none !important;
+    transition: background-color 120ms ease, transform 80ms ease !important;
+  }
+
+  .chat-input__send:hover:not(:disabled) {
+    transform: none !important;
+    background: var(--porr-yellow-hover) !important;
+  }
+
+  .chat-input__send:active:not(:disabled) {
+    transform: scale(0.98) !important;
+  }
+
+  .chat-input__hint,
+  .chat-input__counter {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 500 !important;
+    font-size: 11.5px !important;
+  }
+
+  /* =========================================================================
+     9. MESSAGES — mono autor/time, calmer bubble
+     ========================================================================= */
+
+  .chat-message__avatar {
+    border-radius: var(--radius-sm) !important;
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 600 !important;
+    box-shadow: none !important;
+  }
+
+  .chat-message__author {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 500 !important;
+    font-size: 11.5px !important;
+    letter-spacing: 0.02em !important;
+    text-transform: lowercase;
+  }
+
+  .chat-message__streaming-tag {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 500 !important;
+  }
+
+  .chat-message__bubble {
+    border-radius: var(--radius-md) !important;
+    box-shadow: none !important;
+  }
+
+  /* =========================================================================
+     10. SOURCES — refined citation
+     ========================================================================= */
+
+  .chat-sources {
+    border-radius: 0 var(--radius-md) var(--radius-md) 0 !important;
+  }
+
+  .chat-sources__title {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 500 !important;
+    font-size: 10.5px !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+  }
+
+  .chat-sources__count,
+  .chat-sources__page {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 500 !important;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .chat-sources__file {
+    font-weight: 600 !important;
+  }
+
+  .chat-sources-panel__eyebrow,
+  .document-details-panel__eyebrow {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  .chat-sources-panel__number,
+  .chat-sources-panel__score {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 600 !important;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .chat-sources-panel__title,
+  .document-details-panel__title {
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  /* =========================================================================
+     11. DOCUMENTS MANAGER — mono metadata
+     ========================================================================= */
+
+  .documents-manager__eyebrow {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.10em !important;
+  }
+
+  .documents-manager__title {
+    font-weight: 700 !important;
+    letter-spacing: -0.025em !important;
+  }
+
+  .documents-manager__stat-card {
+    border-radius: var(--radius-md) !important;
+  }
+
+  .documents-manager__stat-card span {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  .documents-manager__stat-card strong {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 600 !important;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .documents-manager__table th {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 500 !important;
+    font-size: 10.5px !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+  }
+
+  .documents-manager__file small {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 500 !important;
+  }
+
+  .documents-manager__file-mark {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 600 !important;
+  }
+
+  .documents-manager__status--ready,
+  .documents-manager__status--processing,
+  .documents-manager__status--failed {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 600 !important;
+    font-size: 10.5px !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    border-radius: 999px !important;
+  }
+
+  /* =========================================================================
+     12. CODE BLOCKS w odpowiedziach — mono + tight
+     ========================================================================= */
+
+  .md__pre {
+    border-radius: var(--radius-md) !important;
+  }
+
+  .md__code-inline {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 500 !important;
+  }
+
+  .md__copy {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 500 !important;
+    font-size: 11px !important;
+  }
+
+  /* =========================================================================
+     13. SETTINGS — bez radial glow w dark
+     ========================================================================= */
+
+  :root[data-theme='dark'] .app-settings {
+    background: #0f1c30 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+
+  :root[data-theme='dark'] .app-settings__option,
+  :root[data-theme='dark'] .app-settings__switch {
+    background: #122036 !important;
+    border-color: rgba(255, 255, 255, 0.06) !important;
+  }
+
+  :root[data-theme='dark'] .app-settings__option--active {
+    background: rgba(255, 237, 0, 0.06) !important;
+    border-color: var(--porr-yellow) !important;
+    box-shadow: 0 0 0 1px rgba(255, 237, 0, 0.3) !important;
+  }
+
+  .app-settings__eyebrow {
+    font-family: var(--kp-font-mono) !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.10em !important;
+  }
+
+  /* =========================================================================
+     14. SCROLLBARS — thin & quiet
+     ========================================================================= */
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 999px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--text-soft);
+  }
+}
