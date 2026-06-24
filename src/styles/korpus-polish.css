@@ -282,18 +282,22 @@
   }
 
   /* "Korpus" — w light żółty highlight pod tekstem zamiast brązowego koloru */
-  :root[data-theme='light'] .empty-state__title span,
-  :root:not([data-theme='dark']) .empty-state__title span {
-    color: var(--text-main) !important;
-    background-image: linear-gradient(
-      transparent 65%,
-      rgba(255, 237, 0, 0.6) 65%,
-      rgba(255, 237, 0, 0.6) 95%,
-      transparent 95%
-    );
-    background-repeat: no-repeat;
-    padding: 0 2px;
-  }
+  :root[data-theme='light'] .empty-state .empty-state__title span,
+:root:not([data-theme='dark']) .empty-state .empty-state__title span {
+  color: #102033 !important;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 62%,
+    #FFED00 62%,
+    #FFED00 96%,
+    transparent 96%
+  ) !important;
+  padding: 0 4px !important;
+  border-radius: 2px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
 
   :root[data-theme='dark'] .empty-state__title span {
     color: var(--porr-yellow) !important;
