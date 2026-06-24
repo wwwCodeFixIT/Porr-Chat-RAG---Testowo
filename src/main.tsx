@@ -4,7 +4,6 @@ import { App } from './app/App';
 import { ConfirmDialogProvider } from './features/ui/confirm/ConfirmDialog';
 
 import './styles/theme.css';
-import './styles/product-ready.css';
 
 // Domyślny motyw ustawiany natychmiast (przed renderem React), żeby uniknąć
 // mignięcia nieostylowanej treści. useDarkMode() i tak nadpisze go preferencją

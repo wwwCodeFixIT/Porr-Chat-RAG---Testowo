@@ -227,7 +227,7 @@
 
 .documents-manager__folder--active {
   border-left-color: var(--porr-yellow);
-  background: rgba(228, 194, 79, 0.22);
+  background: rgba(255, 237, 0, 0.22);
   color: var(--porr-blue);
 }
 
@@ -268,7 +268,7 @@
 
 .documents-manager__folder-row--active {
   border-left-color: var(--porr-yellow);
-  background: rgba(228, 194, 79, 0.22);
+  background: rgba(255, 237, 0, 0.22);
 }
 
 .documents-manager__folder--custom {
@@ -312,7 +312,7 @@
   padding: 6px;
   border-left: 4px solid var(--porr-yellow);
   border-radius: var(--radius-sm);
-  background: rgba(228, 194, 79, 0.1);
+  background: rgba(255, 237, 0, 0.1);
 }
 
 .documents-manager__folder-edit input {
@@ -397,7 +397,7 @@
   gap: 16px;
   padding: 14px 18px;
   border-bottom: 1px solid var(--border);
-  background: rgba(228, 194, 79, 0.12);
+  background: rgba(255, 237, 0, 0.12);
 }
 
 .documents-manager__bulk-bar > div:first-child {

@@ -5,7 +5,7 @@
   min-width: 0;
   overflow: hidden;
   background:
-    radial-gradient(circle at 42% -16%, rgba(228, 194, 79, 0.075), transparent 34%),
+    radial-gradient(circle at 42% -16%, rgba(255, 237, 0, 0.075), transparent 34%),
     var(--page-bg);
 }
 
@@ -37,10 +37,10 @@
   gap: 6px;
   margin-bottom: 4px;
   padding: 4px 9px;
-  border: 1px solid rgba(228, 194, 79, 0.28);
+  border: 1px solid rgba(255, 237, 0, 0.28);
   border-radius: 999px;
-  background: rgba(228, 194, 79, 0.08);
-  color: var(--porr-yellow);
+  background: rgba(255, 237, 0, 0.08);
+  color: var(--accent-text);
   font-size: 11px;
   font-weight: 950;
   letter-spacing: 0.08em;
@@ -99,7 +99,7 @@
 }
 
 .chat-main__doc-health strong {
-  color: var(--porr-yellow);
+  color: var(--accent-text);
   font-size: 14px;
   font-weight: 950;
 }
@@ -134,8 +134,8 @@
 
 .chat-main__documents--active {
   border-color: var(--porr-yellow);
-  background: rgba(228, 194, 79, 0.12);
-  color: var(--porr-yellow);
+  background: rgba(255, 237, 0, 0.12);
+  color: var(--accent-text);
 }
 
 .chat-main__error {

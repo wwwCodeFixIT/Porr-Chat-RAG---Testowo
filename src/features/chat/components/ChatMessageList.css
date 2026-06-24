@@ -25,7 +25,7 @@
   gap: 7px;
   height: 36px;
   padding: 0 16px;
-  border: 1px solid var(--border-strong, rgba(228, 194, 79, 0.36));
+  border: 1px solid var(--border-strong, rgba(255, 237, 0, 0.36));
   border-radius: 999px;
   background: var(--surface, #101b36);
   color: var(--text-main, #f8fbff);
@@ -40,14 +40,14 @@
 
 .chat-message-list__jump:hover {
   background: var(--surface-muted, #162342);
-  border-color: var(--porr-yellow, #e4c24f);
+  border-color: var(--porr-yellow, #ffed00);
   transform: translateX(-50%) translateY(-1px);
 }
 
 .chat-message-list__jump span {
   font-size: 15px;
   line-height: 1;
-  color: var(--porr-yellow, #e4c24f);
+  color: var(--accent-text, #6d5300);
 }
 
 @keyframes chat-jump-in {

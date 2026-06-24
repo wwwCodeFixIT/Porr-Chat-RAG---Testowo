@@ -1,4 +1,10 @@
-import type { DocumentDetails, DocumentStatus } from '../../chat/types';
+import type { DocumentDetails } from '../../chat/types';
+import {
+  formatFileSize,
+  formatDocumentDateTime,
+  getDocumentStatusLabel,
+  getFileExtension,
+} from '../utils/documentFormatters';
 
 import './DocumentDetailsPanel.css';
 
@@ -7,38 +13,6 @@ type DocumentDetailsPanelProps = {
   isLoading: boolean;
   onClose: () => void;
 };
-
-function formatFileSize(size?: number) {
-  if (!size) return '—';
-
-  const sizeInMb = size / 1024 / 1024;
-
-  if (sizeInMb >= 1) {
-    return `${sizeInMb.toFixed(1)} MB`;
-  }
-
-  return `${Math.round(size / 1024)} KB`;
-}
-
-function formatDate(value?: string) {
-  if (!value) return '—';
-
-  const date = new Date(value);
-
-  if (Number.isNaN(date.getTime())) {
-    return '—';
-  }
-
-  return date.toLocaleString('pl-PL');
-}
-
-function getStatusLabel(status?: DocumentStatus) {
-  if (status === 'ready') return 'Gotowy';
-  if (status === 'processing') return 'Indeksowanie';
-  if (status === 'failed') return 'Błąd';
-
-  return '—';
-}
 
 export function DocumentDetailsPanel({
   documentDetails,
@@ -79,7 +53,7 @@ export function DocumentDetailsPanel({
         <div className="document-details-panel__content">
           <div className="document-details-panel__file-card">
             <span className="document-details-panel__file-mark">
-              {documentDetails.name.split('.').pop()?.toUpperCase() ?? 'FILE'}
+              {getFileExtension(documentDetails.name)}
             </span>
 
             <div>
@@ -95,7 +69,7 @@ export function DocumentDetailsPanel({
                 <span
                   className={`document-details-panel__status document-details-panel__status--${documentDetails.status}`}
                 >
-                  {getStatusLabel(documentDetails.status)}
+                  {getDocumentStatusLabel(documentDetails.status)}
                 </span>
               </dd>
             </div>
@@ -117,12 +91,12 @@ export function DocumentDetailsPanel({
 
             <div>
               <dt>Dodano</dt>
-              <dd>{formatDate(documentDetails.createdAt)}</dd>
+              <dd>{formatDocumentDateTime(documentDetails.createdAt)}</dd>
             </div>
 
             <div>
               <dt>Ostatnia aktualizacja</dt>
-              <dd>{formatDate(documentDetails.updatedAt)}</dd>
+              <dd>{formatDocumentDateTime(documentDetails.updatedAt)}</dd>
             </div>
           </dl>
 

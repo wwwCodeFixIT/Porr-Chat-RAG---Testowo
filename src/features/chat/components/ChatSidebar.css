@@ -30,7 +30,7 @@
     transform 0.18s ease,
     box-shadow 0.18s ease;
   box-shadow:
-    0 10px 26px rgba(228, 194, 79, 0.20),
+    0 10px 26px rgba(255, 237, 0, 0.20),
     inset 0 0 0 1px rgba(0, 0, 0, 0.06);
 }
 
@@ -75,7 +75,7 @@
 }
 
 .chat-sidebar__search:focus-within {
-  border-color: rgba(228, 194, 79, 0.50);
+  border-color: rgba(255, 237, 0, 0.50);
   background: rgba(0, 0, 0, 0.28);
 }
 
@@ -124,7 +124,7 @@
   padding: 10px 12px;
   border-left: 4px solid var(--porr-yellow);
   border-radius: var(--radius-sm);
-  background: rgba(228, 194, 79, 0.12);
+  background: rgba(255, 237, 0, 0.12);
   color: rgba(255, 255, 255, 0.86);
   font-size: 12.5px;
   line-height: 1.45;
@@ -200,8 +200,8 @@
 }
 
 .chat-sidebar__item--active {
-  background: rgba(228, 194, 79, 0.10);
-  border-color: rgba(228, 194, 79, 0.30);
+  background: rgba(255, 237, 0, 0.10);
+  border-color: rgba(255, 237, 0, 0.30);
   border-left-color: var(--porr-yellow);
 }
 

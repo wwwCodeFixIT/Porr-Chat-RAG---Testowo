@@ -24,6 +24,19 @@ export function formatDocumentDate(value?: string) {
   return date.toLocaleDateString('pl-PL');
 }
 
+/** Wariant z godziną — używany w panelu szczegółów, gdzie precyzja ma znaczenie. */
+export function formatDocumentDateTime(value?: string) {
+  if (!value) return '—';
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return '—';
+  }
+
+  return date.toLocaleString('pl-PL');
+}
+
 export function getDocumentStatusLabel(status: DocumentItem['status']) {
   if (status === 'ready') return 'Gotowy';
   if (status === 'processing') return 'Indeksowanie';

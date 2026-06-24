@@ -4,7 +4,6 @@ import type { DarkMode } from '../../chat/hooks/useDarkMode';
 import type {
   AppContrast,
   AppDensity,
-  AppFontFamily,
   AppFontSize,
   AppSettings,
   AppVisuals,
@@ -47,11 +46,6 @@ const CONTRAST_OPTIONS: Array<{ value: AppContrast; label: string; hint: string 
 const FONT_SIZE_OPTIONS: Array<{ value: AppFontSize; label: string; hint: string }> = [
   { value: 'standard', label: 'Standard', hint: 'Domyślny rozmiar tekstu dla desktopu.' },
   { value: 'large', label: 'Większy tekst', hint: 'Lepsza czytelność na ekranach laptopów.' },
-];
-
-const FONT_FAMILY_OPTIONS: Array<{ value: AppFontFamily; label: string; hint: string }> = [
-  { value: 'readable', label: 'Czytelny UI', hint: 'Segoe UI / systemowa, większa wysokość linii i spokojniejsze nagłówki.' },
-  { value: 'system', label: 'Systemowy', hint: 'Natywna czcionka Windows/macOS, bez ciasnych liter i agresywnych wag.' },
 ];
 
 export function AppSettingsDialog({
@@ -267,30 +261,6 @@ export function AppSettingsDialog({
                 role="radio"
                 aria-checked={settings.fontSize === option.value}
                 onClick={() => onSettingsChange({ fontSize: option.value })}
-              >
-                <strong>{option.label}</strong>
-                <span>{option.hint}</span>
-              </button>
-            ))}
-          </div>
-
-          <div
-            className="app-settings__options app-settings__options--two"
-            role="radiogroup"
-            aria-label="Krój i czytelność czcionki"
-          >
-            {FONT_FAMILY_OPTIONS.map((option) => (
-              <button
-                key={option.value}
-                type="button"
-                className={
-                  settings.fontFamily === option.value
-                    ? 'app-settings__option app-settings__option--active'
-                    : 'app-settings__option'
-                }
-                role="radio"
-                aria-checked={settings.fontFamily === option.value}
-                onClick={() => onSettingsChange({ fontFamily: option.value })}
               >
                 <strong>{option.label}</strong>
                 <span>{option.hint}</span>
